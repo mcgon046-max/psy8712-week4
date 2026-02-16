@@ -10,6 +10,7 @@ wide_tbl[, 5:9] <- sapply(wide_tbl[, 5:9], as.integer) #Really wish you let us u
 wide_tbl$datadate <- as.POSIXct(wide_tbl$datadate, format = "%b %d %Y, %H:%M:%S") # I spent the time manually coding this string, but I think you mentioned a package that does this more easily in class?
 wide_tbl[, 5:9][wide_tbl[, 5:9] == 0] <- NA # I am almost certain there's a dplyr call I'm missing here... #Note: na.if? .... wide_tbl[, 5:9] <- lapply(wide_tbl[, 5:9], na_if, 0)
 wide_tbl <- wide_tbl %>% drop_na(q2) # Scrolled to look for NA's here, I bet there's a more efficient way to check 
-long_tbl <- wide_tbl %>% pivot_longer(-c("casenum", "parnum", "stimver", "datadate"), names_to = "question", values_to = "response")
+long_tbl <- wide_tbl %>% pivot_longer(cols = q1:q5, names_to = "question", values_to = "response")
 
-       
+# Original line 13 answer 
+long_tbl <- wide_tbl %>% pivot_longer(-c("casenum", "parnum", "stimver", "datadate"), names_to = "question", values_to = "value") 
