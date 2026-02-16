@@ -1,1 +1,0 @@
-# Script Settings and Resources
